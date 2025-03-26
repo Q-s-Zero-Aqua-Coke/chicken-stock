@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>주식 거래소</title>
+    <title>회원 정보 페이지</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
@@ -106,7 +106,7 @@
 </head>
 <body>
 <div class="container">
-    <h3>📋 계좌 목록</h3>
+    <h3>📋 회원 목록</h3>
 
     <table>
         <thead>
@@ -138,15 +138,14 @@
         } else {
         %>
         <tr>
-            <td colspan="2">등록된 계좌가 없습니다.</td>
+            <td colspan="2">등록된 회원이 없습니다.</td>
         </tr>
         <% } %>
         </tbody>
     </table>
 
-    <!-- 계좌 등록 -->
     <div class="form-container">
-        <h3>📝 계좌 등록</h3>
+        <h3>📝 회원 등록</h3>
         <form method="post">
             <input type="text" hidden="hidden" name="id" value="0">
             <div class="input-group">
@@ -156,9 +155,8 @@
         </form>
     </div>
 
-    <!-- 계좌 삭제 -->
     <div class="form-container delete-form">
-        <h3>🗑️ 계좌 삭제</h3>
+        <h3>🗑️ 회원 삭제</h3>
         <form action="delete">
             <div class="input-group">
                 <input type="number" name="id" placeholder="삭제할 ID 입력" required>
