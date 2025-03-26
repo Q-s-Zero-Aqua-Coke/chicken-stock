@@ -19,12 +19,30 @@ public class AccountRepository implements JDBCRepository {
         List<Account> accounts = new ArrayList<>();
         try (Connection conn = getConnection(URL, USER, PASSWORD)) {
             Statement stmt = conn.createStatement();
-            String query = "SELECT * FROM accounts";
+            String query = "SELECT * FROM accounts ORDER BY account_id";
             ResultSet rs = stmt.executeQuery(query);
             while (rs.next()) {
                 accounts.add(new Account(rs.getLong("account_id"), rs.getString("nickname")));
             }
         }
         return accounts;
+    }
+
+    public void save(Account account) throws Exception {
+        try (Connection conn = getConnection(URL, USER, PASSWORD)) {
+            Statement stmt = conn.createStatement();
+            String query = "INSERT INTO accounts (nickname) VALUES ('%s')".formatted(account.nickname());
+            int rowsAffected = stmt.executeUpdate(query);
+            System.out.println("Rows affected: " + rowsAffected);
+        }
+    }
+
+    public void delete(Long id) throws Exception {
+        try (Connection conn = getConnection(URL, USER, PASSWORD)) {
+            Statement stmt = conn.createStatement();
+            String query = "DELETE FROM accounts WHERE account_id = %d".formatted(id);
+            int rowsAffected = stmt.executeUpdate(query);
+            System.out.println("Rows affected: " + rowsAffected);
+        }
     }
 }

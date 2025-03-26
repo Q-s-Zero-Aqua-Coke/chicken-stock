@@ -4,8 +4,7 @@ import org.example.chickenstock.model.dto.Account;
 import org.example.chickenstock.model.repository.AccountRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,5 +22,17 @@ public class MainController {
         List<Account> accounts = accountRepository.findAll();
         model.addAttribute("accounts", accounts);
         return "main";
+    }
+
+    @PostMapping
+    public String save(@ModelAttribute Account account) throws Exception {
+        accountRepository.save(account);
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete")
+    public String delect(@RequestParam("id") long id) throws Exception {
+        accountRepository.delete(id);
+        return "redirect:/";
     }
 }
